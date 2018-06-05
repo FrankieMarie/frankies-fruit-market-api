@@ -7,6 +7,7 @@ const mongoose = require('mongoose')
 const fruitRoutes = require('./api/routes/fruits')
 const orderRoutes = require('./api/routes/orders')
 const adminRoutes = require('./api/routes/admin')
+const imageRoutes = require('./api/routes/images')
 
 mongoose.connect('mongodb+srv://frankie:beans@fruitmarket-z00u8.mongodb.net/test?retryWrites=false')
 mongoose.Promise = global.Promise;
@@ -36,6 +37,7 @@ app.use((req, res, next) => {
 app.use('/fruits', fruitRoutes)
 app.use('/orders', orderRoutes)
 app.use('/admin', adminRoutes)
+app.use('/images', imageRoutes)
 
 app.use((req, res, next) => {
   const error = new Error('Not found')
