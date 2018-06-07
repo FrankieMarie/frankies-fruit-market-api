@@ -101,7 +101,8 @@ exports.fruits_delete_fruit = (req, res, next) => {
     .exec()
     .then(result => {
       res.status(200).json({
-        message: 'Fruit deleted'
+        message: 'Fruit deleted',
+        fruitId: req.params.fruitId
       })
     }).catch(err => {
       console.log(err)
