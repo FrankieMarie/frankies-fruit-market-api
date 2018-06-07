@@ -31,7 +31,14 @@ exports.orders_get_all = (req, res, next) => {
 }
 
 exports.orders_create_order = (req, res, next) => {
-  Fruit.findById(req.body.fruitId)
+  console.log('req.body', req.body)
+  Fruit.findById(
+    req.body.fruitId,
+    (err, blah) => {
+      if(err) res.json(err)
+      res.send('works')
+    }
+  )
     .then(fruit => {
       if(!fruit){
         return res.status(404).json({

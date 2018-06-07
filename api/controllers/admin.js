@@ -42,6 +42,7 @@ exports.admin_signup = (req, res, next) => {
 }
 
 exports.admin_login = (req, res, next) => {
+  console.log('req.body', req.body)
   Admin.find({email: req.body.email})
     .exec()
     .then(admin => {
