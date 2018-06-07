@@ -34,10 +34,11 @@ exports.fruits_get_all = (req, res, next) => {
 
 exports.fruits_create_fruit = (req, res, next) => {
   console.log(req.file)
+  console.log(req.body)
   const fruit = new Fruit({
     _id: new mongoose.Types.ObjectId(),
     name: req.body.name,
-    price: req.body.price,
+    price: parseInt(req.body.price),
     description: req.body.description,
     fruitImage: req.file.path
   })

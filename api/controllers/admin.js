@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const Admin = require('../models/admin')
+const expireAmt = 60*60*24*7; //60 seconds * 60 minutes * 24 hours * 7 days = 1 week expire amt
 
 exports.admin_signup = (req, res, next) => {
   Admin.find({email: req.body.email})
@@ -63,12 +64,12 @@ exports.admin_login = (req, res, next) => {
             adminId: admin[0]._id
           }, 'secret',
           {
-            expiresIn: '365d'
+            expiresIn: expireAmt
           }
         )
           return res.status(200).json({
             message: 'Auth successful',
-            token: token
+            token: { token: token, expires: Math.floor(Date.now() / 1000) + expireAmt}
           })
         }
         res.status(401).json({
